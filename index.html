@@ -1,163 +1,249 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Our Family Memories ❤️</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Georgia",serif;
 }
 
 body{
-    background:linear-gradient(to bottom,#000000,#8b0000);
-    color:white;
-    text-align:center;
-    overflow-x:hidden;
+background:linear-gradient(135deg,#000,#8b0000);
+height:100vh;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+.book{
+width:90%;
+max-width:450px;
+background:#fff5e6;
+color:#300;
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 30px black;
 }
 
 h1{
-    margin-top:30px;
-    font-size:40px;
+font-size:35px;
+margin-bottom:20px;
+}
+
+h2{
+font-size:30px;
 }
 
 p{
-    font-size:18px;
-    margin:15px;
+font-size:18px;
+margin:20px;
 }
 
-.music{
-    margin:20px;
+button{
+background:#8b0000;
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:30px;
+font-size:18px;
+margin:10px;
+cursor:pointer;
 }
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
-    padding:20px;
+button:active{
+transform:scale(0.95);
 }
 
-.gallery img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:15px;
-    border:3px solid white;
-    transition:0.3s;
+#memory{
+display:none;
 }
 
-.gallery img:hover{
-    transform:scale(1.05);
+.photo{
+width:100%;
+height:400px;
+object-fit:cover;
+border-radius:15px;
+border:5px solid #8b0000;
 }
 
-.heart{
-    position:fixed;
-    top:-20px;
-    animation:fall linear infinite;
-    font-size:25px;
+.page{
+font-size:18px;
+margin-top:15px;
+}
+
+.hearts{
+position:absolute;
+font-size:25px;
+animation:fall 5s linear infinite;
 }
 
 @keyframes fall{
-    from{
-        transform:translateY(-100px);
-    }
-    to{
-        transform:translateY(100vh);
-    }
+
+0%{
+transform:translateY(-100px);
 }
 
-footer{
-    padding:20px;
-    font-size:18px;
+100%{
+transform:translateY(100vh);
 }
+
+}
+
 </style>
 
 </head>
 
+
 <body>
 
-<h1>Our Family Memories ❤️</h1>
+
+<div class="book" id="cover">
+
+<h1>❤️ Our Family ❤️</h1>
+
+<h2>Memory Book 📖</h2>
 
 <p>
-A place filled with love, laughter and unforgettable moments 🥰
+A book full of love, laughter and unforgettable moments.
 </p>
 
-<div class="music">
-<audio controls autoplay loop>
-    <source src="Family.mp3" type="audio/mpeg">
+<button onclick="openBook()">
+Tap to see memories ✨
+</button>
+
+</div>
+
+
+
+<div class="book" id="memory">
+
+<img class="photo" id="picture" src="photo1.png">
+
+<div class="page" id="count">
+Memory 1 of 34
+</div>
+
+
+<button onclick="back()">
+⬅ Back
+</button>
+
+<button onclick="next()">
+Next ➡
+</button>
+
+
+</div>
+
+
+
+<audio id="song" loop>
+<source src="Family.mp3" type="audio/mpeg">
 </audio>
-</div>
 
-
-<div class="gallery">
-
-<img src="photo1.png">
-<img src="photo2.png">
-<img src="photo3.png">
-<img src="photo4.png">
-<img src="photo5.png">
-<img src="photo6.png">
-<img src="photo7.png">
-<img src="photo8.png">
-<img src="photo9.png">
-<img src="photo10.png">
-<img src="photo11.png">
-<img src="photo12.png">
-<img src="photo13.png">
-<img src="photo14.png">
-<img src="photo15.png">
-<img src="photo16.png">
-<img src="photo17.png">
-<img src="photo18.png">
-<img src="photo19.png">
-<img src="photo20.png">
-<img src="photo21.png">
-<img src="photo22.png">
-<img src="photo23.png">
-<img src="photo24.png">
-<img src="photo25.png">
-<img src="photo26.png">
-<img src="photo27.png">
-<img src="photo28.png">
-<img src="photo29.png">
-<img src="photo30.png">
-<img src="photo31.png">
-<img src="photo32.png">
-<img src="photo33.png">
-<img src="photo34.png">
-
-</div>
-
-
-<footer>
-Made with ❤️ for our family
-</footer>
 
 
 <script>
 
+let number = 1;
+
+
+function openBook(){
+
+document.getElementById("cover").style.display="none";
+document.getElementById("memory").style.display="block";
+
+document.getElementById("song").play();
+
+createHearts();
+
+}
+
+
+
+function next(){
+
+if(number < 34){
+
+number++;
+
+}
+
+changePhoto();
+
+}
+
+
+
+function back(){
+
+if(number > 1){
+
+number--;
+
+}
+
+changePhoto();
+
+}
+
+
+
+function changePhoto(){
+
+document.getElementById("picture").src=
+"photo"+number+".png";
+
+document.getElementById("count").innerHTML=
+"Memory "+number+" of 34";
+
+}
+
+
+
+function createHearts(){
+
 setInterval(()=>{
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
 
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*5)+"s";
+let heart=document.createElement("div");
 
-    document.body.appendChild(heart);
+heart.className="hearts";
 
-    setTimeout(()=>{
-        heart.remove();
-    },8000);
+heart.innerHTML="❤️";
 
-},500);
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=
+(3+Math.random()*4)+"s";
+
+document.body.appendChild(heart);
+
+
+setTimeout(()=>{
+
+heart.remove();
+
+},6000);
+
+
+},700);
+
+}
 
 </script>
 
+
 </body>
-  </html>
+</html>
